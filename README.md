@@ -1,0 +1,2 @@
+## DePauw University Office Hour Lookup
+Understanding that office hour and appointment is very difficult to obtain and somehow have to go ask around to get such thing, we create this application to trivialize that process.
