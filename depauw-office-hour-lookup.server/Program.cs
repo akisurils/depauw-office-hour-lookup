@@ -1,9 +1,16 @@
+global using depauw_officer_hour_lookup.Data; //folder containing ApplicationDbContext class
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 // using NextjsStaticHosting.AspNetCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+//Add DbContext Configuration
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+  options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Step 1: Add Next.js hosting support
 // builder.Services.Configure<NextjsStaticHostingOptions>(builder.Configuration.GetSection("NextjsStaticHosting"));
