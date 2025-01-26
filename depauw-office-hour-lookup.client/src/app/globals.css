@@ -24,7 +24,7 @@
 }
 
 .header {
-  background-color: var(--foreground);
+  background-image: url(https://www.depauw.edu/images/title-headers/default-top.jpg);
   color: var(--text);
   height: 100;
   text-align: center;
