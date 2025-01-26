@@ -15,7 +15,12 @@
   }
 }
 
+
 body {
+  background-image: url(https://www.depauw.edu/dt/css/images/pattern.jpg);
+  height: 100%;
+  width: 100%;
+  background-size: cover  ;
   color: var(--foreground);
   background: var(--background);
   font-family: "League Spartan", Helvetica, sans-serif;
