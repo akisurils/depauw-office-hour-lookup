@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("depauw-office-hour-lookup.server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15ffcc4f4f9bbe02a750373bbbf3f36c39c8c443")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5748701ae2a0f0ab9955075285faac01795d6d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("depauw-office-hour-lookup.server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("depauw-office-hour-lookup.server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
