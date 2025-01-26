@@ -5,9 +5,13 @@ namespace depauw_officer_hour_lookup.Data
 {
   public class ApplicationDbContext : DbContext
   {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
-     {
-     }
+        // public ApplicationDbContext()
+        // {
+        // }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+    {
+    }
     public DbSet <OfficeHourModelClass> YourModel{ get; set; }
   }
 }
