@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.SqlServer;
 // using NextjsStaticHosting.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add DbContext Configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-  options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+  
 
 // Step 1: Add Next.js hosting support
 // builder.Services.Configure<NextjsStaticHostingOptions>(builder.Configuration.GetSection("NextjsStaticHosting"));
