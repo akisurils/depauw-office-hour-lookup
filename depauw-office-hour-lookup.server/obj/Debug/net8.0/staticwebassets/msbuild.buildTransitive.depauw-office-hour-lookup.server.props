@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\depauw-office-hour-lookup.server.props" />
-</Project>
