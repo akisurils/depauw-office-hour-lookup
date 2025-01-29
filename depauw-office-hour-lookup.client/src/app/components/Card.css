@@ -1,7 +1,27 @@
 .card {
     background-color: var(--white);
+    width: 400px;
 }
 
 .card-footer {
     background-color: var(--yellow);
+    height: 4px;
 }
+
+.card-info {
+    display: flex;
+}
+
+.card-profile-pic {
+    flex: 1;
+}
+
+.card-general {
+    flex: 2;
+}
+
+.card-office-hour {
+    flex: 2;
+}
+
+

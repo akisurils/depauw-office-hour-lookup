@@ -23,12 +23,14 @@
   height: 100vh;
   background-repeat: repeat;
   font-family: "League Spartan", Helvetica, sans-serif;
+  align-items: center;
 }
 
 .header {
   background-image: url(https://www.depauw.edu/images/title-headers/default-top.jpg);
   color: var(--white);
   height: 100;
+  width: 100%;
   text-align: center;
   font-size: 48px;
   font-weight: 600;
