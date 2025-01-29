@@ -17,8 +17,10 @@
 } */
 
 .bg {
+  display: flex;
+  flex-direction: column;
   background-image: url(https://www.depauw.edu/dt/css/images/pattern.jpg);
-  height: 100vh;
+  height: 100%;
   background-repeat: repeat;
   font-family: "League Spartan", Helvetica, sans-serif;
 }
@@ -46,6 +48,39 @@
 .separator {
   margin: 0 8;
   color: var(--background);
+}
+
+.searchbar {
+  display: flex;
+  width: fit-content;
+  gap: 10px;
+  padding: 5px 20px;
+  justify-content: center;
+  background-color: var(--foreground);
+  color: var(--background);
+  align-self: center;
+}
+
+.search-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--background);
+  padding: 0 8px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--foreground);
+  padding: 2 8;
+}
+
+.search-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
