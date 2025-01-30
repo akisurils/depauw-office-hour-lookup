@@ -12,6 +12,7 @@ namespace depauw_officer_hour_lookup.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
     {
     }
-    public DbSet <OfficeHourModelClass> YourModel{ get; set; }
+    public DbSet<OfficeHourModelClass> OfficeHours{ get; set; }
+    public DbSet<ProfessorModelClass> Professors{ get; set; }
   }
 }

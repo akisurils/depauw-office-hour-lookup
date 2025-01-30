@@ -34,7 +34,23 @@ namespace depauwofficehourlookup.server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("YourModel");
+                    b.ToTable("OfficeHours");
+                });
+
+            modelBuilder.Entity("depauw_officer_hour_lookup.Model.ProfessorModelClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professors");
                 });
 #pragma warning restore 612, 618
         }
