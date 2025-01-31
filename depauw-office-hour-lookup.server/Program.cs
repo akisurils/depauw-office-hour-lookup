@@ -8,12 +8,16 @@ using depauw_officer_hour_lookup.Model;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 // using NextjsStaticHosting.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add DbContext Configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// builder.Services.AddAuthorization();
   
 
 // Step 1: Add Next.js hosting support
@@ -21,8 +25,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 // builder.Services.AddNextjsStaticHosting();
 
 var app = builder.Build();
-app.UseRouting();
+// app.UseRouting();
 
+// app.UseAuthorization();
+
+// app.MapControllers();
+
+app.UseHttpsRedirection();
 // Step 2: Register dynamic endpoints to serve the correct HTML files at the right request paths.
 // app.MapNextjsStaticHtmls();
 
@@ -49,32 +58,37 @@ using (var scope = app.Services.CreateScope()) // Create a scope specifically fo
     }
 }
 
-var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+app.MapPost("/api/signup", async (UserModelClass user, ApplicationDbContext context) => {
 
-lifetime.ApplicationStarted.Register(() => {
-  using (var scope = app.Services.CreateScope()) {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ApplicationDbContext>();
-    // var lifetime = services.GetRequiredService<IHostApplicationLifetime>();
+    if(await context.Users.Where(u => u.Username == user.Username).AnyAsync()) {
+        return Results.BadRequest("Username already exists");
+    }
 
-    // lifetime.ApplicationStarted.Register(() => {
-      if(!context.OfficeHours.Any()) {
-        var officerHour = new OfficeHourModelClass {
-          Name = "Bruh"
-        };
-        context.OfficeHours.Add(officerHour);
-        context.SaveChanges();
-      }
-    // });
-  }
+    context.Users.Add(user);
+    await context.SaveChangesAsync();
+
+    return Results.Created("$/api/signup", "User created");
+
+  // return user;
 });
-// using (var context = new ApplicationDbContext()){
-//   var officerHour = new OfficeHourModelClass {
-//     Name = "Bruh"
-//   };
 
-//   context.YourModel.Add(officerHour);
-//   context.SaveChanges();
-// }
+// var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+
+// lifetime.ApplicationStarted.Register(() => {
+//   using (var scope = app.Services.CreateScope()) {
+
+//     var services = scope.ServiceProvider;
+//     var context = services.GetRequiredService<ApplicationDbContext>();
+
+//     if(!context.OfficeHours.Any()) {
+//       var officerHour = new OfficeHourModelClass {
+//         Name = "Bruh"
+//       };
+//       context.OfficeHours.Add(officerHour);
+//       context.SaveChanges();
+//     }
+//   }
+// });
+
 
 app.Run();

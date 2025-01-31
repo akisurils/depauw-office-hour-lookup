@@ -11,7 +11,7 @@ using depauw_officer_hour_lookup.Data;
 namespace depauwofficehourlookup.server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250130194219_InitialCreate")]
+    [Migration("20250131035856_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace depauwofficehourlookup.server.Migrations
                     b.ToTable("OfficeHours");
                 });
 
-            modelBuilder.Entity("depauw_officer_hour_lookup.Model.ProfessorModelClass", b =>
+            modelBuilder.Entity("depauw_officer_hour_lookup.Model.UserModelClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,12 +48,24 @@ namespace depauwofficehourlookup.server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Professors");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,6 +13,6 @@ namespace depauw_officer_hour_lookup.Data
     {
     }
     public DbSet<OfficeHourModelClass> OfficeHours{ get; set; }
-    public DbSet<ProfessorModelClass> Professors{ get; set; }
+    public DbSet<UserModelClass> Users{ get; set; }
   }
 }

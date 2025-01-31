@@ -24,16 +24,19 @@ namespace depauwofficehourlookup.server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Professors",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Professors", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
@@ -44,7 +47,7 @@ namespace depauwofficehourlookup.server.Migrations
                 name: "OfficeHours");
 
             migrationBuilder.DropTable(
-                name: "Professors");
+                name: "Users");
         }
     }
 }
