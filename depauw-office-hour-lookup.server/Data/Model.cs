@@ -14,7 +14,7 @@ namespace depauw_officer_hour_lookup.Model {
         public string FullName{get;set;}
     }
 
-    public class UserModel: IdentityUser{
+    public class UserModel{
         public int Id{get;set;}
 
         [Required]
