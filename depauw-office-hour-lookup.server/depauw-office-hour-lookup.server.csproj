@@ -16,6 +16,7 @@
     <!-- Relative path where the Next.js compiled results will be published when the Publish target for the current project is called.
          This will copy the static Next.js app outputs along with this server app so that the files can be served. -->
     <NextJsOutputPublishRelativePath>clientdist</NextJsOutputPublishRelativePath>
+    <UserSecretsId>75f84174-9c43-49f8-95c0-2c96d9c72548</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <_NextjsCustomFiles Include="$(NextJsCompiledOutputPath)\**" />
@@ -24,16 +25,17 @@
     </DotNetPublishFiles>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Npgsql" Version="9.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
     <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" /> -->
   </ItemGroup>
 
