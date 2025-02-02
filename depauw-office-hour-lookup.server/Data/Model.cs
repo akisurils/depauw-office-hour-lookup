@@ -3,14 +3,18 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace depauw_officer_hour_lookup.Model {
-    public class OfficeHourModelClass {
+    public class OfficeHourModel {
         public int Id{get;set;}
         public string Name{get;set;}
     }
+    public class Users: IdentityUser{
+        public string FullName{get;set;}
+    }
 
-    public class UserModelClass {
+    public class UserModel: IdentityUser{
         public int Id{get;set;}
 
         [Required]
@@ -26,5 +30,10 @@ namespace depauw_officer_hour_lookup.Model {
         [Required]
         public string Password{get;set;}
 
+    
+    }
+    public class LoginCredentials {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

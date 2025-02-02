@@ -1,4 +1,5 @@
 using depauw_officer_hour_lookup.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace depauw_officer_hour_lookup.Data
@@ -9,10 +10,15 @@ namespace depauw_officer_hour_lookup.Data
         // {
         // }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
     {
     }
-    public DbSet<OfficeHourModelClass> OfficeHours{ get; set; }
-    public DbSet<UserModelClass> Users{ get; set; }
+    public DbSet<OfficeHourModel> OfficeHours{ get; set; }
+    // public DbSet<UserModelClass> Users{ get; set; }
+  }
+  public class ApplicationIdentityDbContext : IdentityDbContext<UserModel> {
+    public ApplicationIdentityDbContext(DbContextOptions options) : base(options) {
+
+    }
   }
 }
