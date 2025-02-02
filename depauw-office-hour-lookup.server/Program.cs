@@ -1,43 +1,53 @@
 using DePauwOfficeHourLookup.server.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddControllers();
 
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Database context
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration["postgres:ConnectionString"]));
 
 var app = builder.Build();
 
-// app.UseRouting();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-// app.UseAuthorization();
+//app.UseRouting();
 
-// app.MapControllers();
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
 
 // Use the Migrate method during application startup to ensure the database is created 
 // and any pending migrations are applied.
-using (var scope = app.Services.CreateScope()) // Create a scope specifically for migration
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
+//using (var scope = app.Services.CreateScope()) // Create a scope specifically for migration
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<AppDbContext>();
 
-    try
-    {
-        context.Database.Migrate(); // Apply any pending migrations
-    }
-    catch (Exception ex)
-    {
-        // Log the migration error.  Don't let it crash the application startup.
-        // Use a proper logging mechanism like ILogger or Serilog here instead of Console.WriteLine.
-        Console.WriteLine($"Error applying migrations: {ex.Message}");
-    }
-}
+//    try
+//    {
+//        context.Database.Migrate(); // Apply any pending migrations
+//    }
+//    catch (Exception ex)
+//    {
+//        // Log the migration error.  Don't let it crash the application startup.
+//        // Use a proper logging mechanism like ILogger or Serilog here instead of Console.WriteLine.
+//        Console.WriteLine($"Error applying migrations: {ex.Message}");
+//    }
+//}
 
 //app.MapPost("/api/signup", async (UserModelClass user, ApplicationDbContext context) =>
 //{
@@ -55,10 +65,10 @@ using (var scope = app.Services.CreateScope()) // Create a scope specifically fo
 //    // return user;
 //});
 
-app.MapGet("/api/testdata", async (AppDbContext context) =>
-{
-    return await context.TestInfos.ToListAsync();
-});
+//app.MapGet("/api/testdata", async (AppDbContext context) =>
+//{
+//    return await context.TestInfos.ToListAsync();
+//});
 
 // var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
 
