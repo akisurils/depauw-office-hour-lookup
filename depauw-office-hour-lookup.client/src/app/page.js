@@ -20,7 +20,7 @@ export default function Home() {
             <div>
                 Filter
                 <div>Department</div>
-                <div>Skin color</div>
+                <div></div>
             </div>
             <Card />
         </div>
