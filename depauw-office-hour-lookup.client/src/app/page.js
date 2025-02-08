@@ -17,6 +17,11 @@ export default function Home() {
                 <input type="text" className="search-form" />
                 <button className="search-button">Search</button>
             </div>
+            <div>
+                Filter
+                <div>Department</div>
+                <div></div>
+            </div>
             <Card />
         </div>
     );

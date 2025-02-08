@@ -1,38 +1,30 @@
-global using depauw_officer_hour_lookup.Data; //folder containing ApplicationDbContext class
-using Microsoft.EntityFrameworkCore;
+using depauw_officer_hour_lookup.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using dotenv.net;
 using depauw_officer_hour_lookup.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
-DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] {"./.env"}));
-var dotenv = DotEnv.Read();
 
 var configuration = builder.Configuration;
 
-var username = dotenv["DB_USER"];
-
-var password = dotenv["DB_PASSWORD"];
-
-
 // Replace placeholders in the connection string with actual environment variables
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
 
-    .Replace("{USERNAME}", username)
+//     .Replace("{USERNAME}", username)
 
-    .Replace("{PASSWORD}", password);
+//     .Replace("{PASSWORD}", password);
 
 // Console.Out.WriteLine(connectionString);
 
 
 
 // builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-builder.Services.AddDbContext<ApplicationIdentityDbContext>(options => options.UseNpgsql(connectionString));
+// builder.Services.AddDbContext<ApplicationIdentityDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<ApplicationIdentityDbContext>(options => options.UseNpgsql(builder.Configuration["postgres:ConnectionString"]));
 builder.Services.AddIdentity<Users, IdentityRole>(options => {
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 8;
@@ -48,31 +40,22 @@ builder.Services.AddIdentity<Users, IdentityRole>(options => {
 
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+// Swagger
+if (app.Environment.IsDevelopment())
 {
-    // var context = scope.ServiceProvider.GetRequiredService<ApplicationIdentityDbContext>();
-    // context.Database.CanConnect();
-    // Console.WriteLine("Connection successful!");
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationIdentityDbContext>();
-    dbContext.Database.Migrate();
-}  
-
-
-app.MapGet("/api/testdata", async (ApplicationIdentityDbContext context) =>
-{
-    return await context.TestInfos.ToListAsync();
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // For Controller-based
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
