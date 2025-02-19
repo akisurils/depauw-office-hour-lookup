@@ -1,6 +1,7 @@
 
 // using static Mysqlx.Datatypes.Scalar.Types;
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -92,5 +93,20 @@ namespace depauw_officer_hour_lookup.Models {
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
+    }
+
+    public class CourseModel {
+        public string SOC {get;set;}
+        public string Course {get;set;}
+        public string Description {get;set;}
+        public string Credit {get;set;}
+        public string Method {get;set;}
+        public string Time{get;set;}
+        public string Area{get;set;}
+        public string Cmp{get;set;}
+        public string IP {get;set;}
+        public bool PassFail {get;set;}
+        public string Instructor{get;set;}
+        public string Notes {get;set;}
     }
 }
