@@ -107,6 +107,7 @@ namespace depauw_officer_hour_lookup.Models {
         public string IP {get;set;}
         public bool PassFail {get;set;}
         public string Instructor{get;set;}
+        public string Room{get;set;}
         public string Notes {get;set;}
     }
 }
