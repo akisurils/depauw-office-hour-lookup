@@ -2,7 +2,7 @@ import React from "react";
 import "./Card.css";
 import Image from "next/image";
 
-export const Card = () => {
+const Card = () => {
     return (
         <div className="card">
             <div className="card-info">
@@ -27,3 +27,5 @@ export const Card = () => {
         </div>
     );
 };
+
+export default Card;
